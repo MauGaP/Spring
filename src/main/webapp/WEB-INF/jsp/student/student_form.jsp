@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<spring:url value="/user/save" var="saveURL"/>
-<form:form modelAttribute="userForm" method="POST" action="${saveURL}">
+<spring:url value="/student/save" var="saveURL"/>
+<form:form modelAttribute="studentForm" method="POST" action="${saveURL}">
     <form:hidden path="userId"/>
     <table>
         <tr>
@@ -24,6 +24,14 @@
         <tr>
             <td>Address:</td>
             <td><form:input path="address"/></td>
+        </tr>
+        <tr>
+            <td>Grade:</td>
+            <td><form:input path="grade"/></td>
+        </tr>
+        <tr>
+            <td>Average:</td>
+            <td><form:input path="average"/></td>
         </tr>
         <tr>
             <td>

@@ -1,9 +1,7 @@
 package com.mpedano.spring.controller;
 
 import com.mpedano.spring.model.Student;
-import com.mpedano.spring.model.User;
 import com.mpedano.spring.service.StudentService;
-import com.mpedano.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,33 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value="/student")
+public class StudentController {
 
-    @Autowired
-    UserService userService;
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
     public ModelAndView list() {
-        ModelAndView model = new ModelAndView("user/user_page");
-
-        List<User> list = userService.listAllUsers();
-        model.addObject("listUser", list);
-
-        List<Student> listStudent = studentService.listAllStudents();
-        model.addObject("listStudent", listStudent);
-
-        return model;
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView add() {
-        ModelAndView model = new ModelAndView("user/user_form");
-
-        User user = new User();
-        model.addObject("userForm", user);
+        ModelAndView model = new ModelAndView("student/");
+        
+        List<Student> list = studentService.listAllStudents();
+        model.addObject("listStudent", list);
 
         return model;
     }
@@ -50,30 +33,30 @@ public class UserController {
     public ModelAndView addStudent() {
         ModelAndView model = new ModelAndView("student/student_form");
 
-        Student student = new Student();
-        model.addObject("studentForm", student);
+        Student user = new Student();
+        model.addObject("studentForm", user);
 
         return model;
     }
 
     @RequestMapping(value = "/update/{userId}", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable("userId") int userId) {
-        ModelAndView model = new ModelAndView("user/user_form");
+        ModelAndView model = new ModelAndView("student/student_form");
 
-        User user = userService.findUserById(userId);
-        model.addObject("userForm", user);
+        Student student = studentService.findStudentById(userId);
+        model.addObject("studentForm", student);
 
         return model;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("userForm") User user) {
-        if (user != null && user.getUserId() != null) {
+    public ModelAndView save(@ModelAttribute("studentForm") Student student) {
+        if (student != null && student.getUserId() != null) {
             //update
-            userService.updateUser(user);
+            studentService.updateStudent(student);
         } else {
             //add new
-            userService.addUser(user);
+            studentService.addStudent(student);
         }
 
         return new ModelAndView("redirect:/user/list");
@@ -81,9 +64,8 @@ public class UserController {
 
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("userId") int userId) {
-        userService.deleteUser(userId);
+        studentService.deleteStudent(userId);
 
         return new ModelAndView("redirect:/user/list");
     }
 }
-

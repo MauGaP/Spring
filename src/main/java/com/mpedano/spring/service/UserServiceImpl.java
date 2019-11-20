@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserDAO userDao;
+    private UserDAO userDao;
 
     @Autowired
     public void setUserDao(UserDAO userDao) {
@@ -29,11 +29,11 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
     }
 
-    public void deleteUser(int id) {
-        userDao.deleteUser(id);
+    public void deleteUser(int userId) {
+        userDao.deleteUser(userId);
     }
 
-    public User findUserById(int id) {
-        return userDao.findUserById(id);
+    public User findUserById(int userId) {
+        return userDao.findUserById(userId);
     }
 }

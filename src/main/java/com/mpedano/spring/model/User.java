@@ -1,7 +1,8 @@
 package com.mpedano.spring.model;
 
 public class User {
-    private Integer id;
+
+    public Integer userId;
     private String firstName;
     private String lastName;
     private String address;
@@ -10,17 +11,17 @@ public class User {
         super();
     }
 
-    public User(Integer id) {
+    public User(Integer userId) {
         super();
-        this.id = id;
+        this.userId = userId;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

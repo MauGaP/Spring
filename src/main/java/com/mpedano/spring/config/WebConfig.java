@@ -24,7 +24,6 @@ public class WebConfig implements WebMvcConfigurer {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
-
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
