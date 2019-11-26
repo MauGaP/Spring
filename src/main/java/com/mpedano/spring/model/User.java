@@ -1,7 +1,13 @@
 package com.mpedano.spring.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue
     public Integer userId;
     private String firstName;
     private String lastName;

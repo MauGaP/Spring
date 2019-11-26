@@ -3,6 +3,7 @@ package com.mpedano.spring.service;
 import com.mpedano.spring.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     public List<User> listAllUsers();
@@ -13,5 +14,5 @@ public interface UserService {
 
     public void deleteUser(int userId);
 
-    public User findUserById(int userId);
+    public Optional<User> findUserById(int userId);
 }

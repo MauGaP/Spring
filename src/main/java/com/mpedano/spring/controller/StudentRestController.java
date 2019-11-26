@@ -1,5 +1,6 @@
 package com.mpedano.spring.controller;
 
+import com.mpedano.spring.model.Student;
 import com.mpedano.spring.model.User;
 import com.mpedano.spring.service.StudentService;
 import com.mpedano.spring.service.UserService;
@@ -13,49 +14,50 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
-public class UserRestController {
+@RequestMapping("/students")
+public class StudentRestController {
 
     @Autowired
     UserService userService;
+
     @Autowired
     StudentService studentService;
 
     @GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity getUsers() {
-        List<User> list = userService.listAllUsers();
+    public ResponseEntity getStudents() {
+        List<Student> list = studentService.listAllStudents();
         return ResponseEntity
                 .ok()
-                .header("myheader", "myvalue")
+                .header("myHeader", "myValue")
                 .body(list);
     }
 
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity getUser(@PathVariable("id") int id) {
-        Optional<User> user = userService.findUserById(id);
+    public ResponseEntity getStudent(@PathVariable("id") int id) {
+        Optional<Student> student = studentService.findStudentById(id);
         return ResponseEntity
                 .ok()
                 .header("myHeader", "myValue")
-                .body(user);
+                .body(student);
     }
 
     @PostMapping(value = "/add", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public void addUser(@RequestBody User user) {
-        userService.addUser(user);
+    public void addUser(@RequestBody Student student) {
+        studentService.addStudent(student);
     }
 
     @DeleteMapping("/{id}/delete")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id);
+        studentService.deleteStudent(id);
     }
 
     @PutMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateUser(@RequestBody User user) {
-        userService.updateUser(user);
+    public void updateUser(@RequestBody Student student) {
+        studentService.updateStudent(student);
     }
 }
