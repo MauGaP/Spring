@@ -15,4 +15,6 @@ public interface UserService {
     public void deleteUser(int userId);
 
     public Optional<User> findUserById(int userId);
+
+    public List<User> getUsersByFirstName(String firstName);
 }

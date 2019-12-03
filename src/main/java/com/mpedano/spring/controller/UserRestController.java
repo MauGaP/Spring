@@ -58,4 +58,13 @@ public class UserRestController {
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
+
+    @GetMapping(value = "/{firstName}/listByFirstName/")
+    public ResponseEntity getUsersByFirstName(@PathVariable("firstName") String firstName) {
+        List<User> list = userService.getUsersByFirstName(firstName);
+        return ResponseEntity
+                .ok()
+                .header("myHeader", "myValue")
+                .body(list);
+    }
 }
