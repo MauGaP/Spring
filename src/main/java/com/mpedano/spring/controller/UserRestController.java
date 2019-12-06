@@ -18,8 +18,6 @@ public class UserRestController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    StudentService studentService;
 
     @GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getUsers() {
