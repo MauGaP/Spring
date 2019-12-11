@@ -25,7 +25,7 @@ public class StudentDAOImpl implements StudentDAO {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public List<Student> listAllStudents() {
+    public List<Student> listAll() {
         String sql = "SELECT users.userId, users.firstName, users.lastName, users.address, students.grade, students.average " +
                 "FROM students " +
                 "INNER JOIN users ON students.userId=users.userId ";
@@ -36,7 +36,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Transactional
-    public void addStudent(Student student) {
+    public void add(Student student) {
         String addStudentSql = "INSERT INTO students (userId, grade, average) " +
                 "VALUES (LAST_INSERT_ID(), :grade, :average); ";
 
@@ -44,13 +44,13 @@ public class StudentDAOImpl implements StudentDAO {
         user.setFirstName(student.getFirstName());
         user.setLastName(student.getLastName());
         user.setAddress(student.getAddress());
-        userDAO.addUser(user);
+        userDAO.add(user);
         namedParameterJdbcTemplate.update(addStudentSql, getSqlParameterByModel(student));
 
     }
 
     @Transactional
-    public void updateStudent(Student student) {
+    public void update(Student student) {
         String sql = "UPDATE students s SET grade = :grade, average = :average " +
                 "WHERE s.userId = :userId; ";
 
@@ -58,18 +58,18 @@ public class StudentDAOImpl implements StudentDAO {
         user.setFirstName(student.getFirstName());
         user.setLastName(student.getLastName());
         user.setAddress(student.getAddress());
-        userDAO.addUser(user);
+        userDAO.add(user);
         namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(student));
     }
 
-    public void deleteStudent(int userId) {
+    public void delete(Integer userId) {
         String sql = "DELETE FROM users u WHERE u.userId = :userId; " +
                 "DELETE FROM students s WHERE s.userId = :userId; ";
 
         namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(new Student(userId)));
     }
 
-    public Student findStudentById(int userId) {
+    public Student findById(Integer userId) {
         String sql = "SELECT u.userId, u.firstName, u.lastName, u.address, s.grade, s.average " +
                 "FROM students s " +
                 "INNER JOIN users u " +

@@ -1,6 +1,7 @@
 package com.mpedano.spring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,9 @@ import org.springframework.web.servlet.view.JstlView;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "com.mpedano")
+@EnableWebMvc  //investigar
+@ComponentScan(basePackages = {"com.mpedano.spring.dao"})
+@EntityScan(basePackages = "com.mpedano.spring.model")
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     DataSource dataSource;

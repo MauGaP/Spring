@@ -1,9 +1,12 @@
 package com.mpedano.spring.controller;
 
+import com.mpedano.spring.messageexample.SetterMessage;
 import com.mpedano.spring.model.Student;
 import com.mpedano.spring.model.User;
 import com.mpedano.spring.service.StudentService;
 import com.mpedano.spring.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,9 +22,15 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
     @Autowired
-    StudentService studentService;
+    private StudentService studentService;
+
+    @Autowired
+    private SetterMessage setterMessage;
+
+    private Logger logger = LogManager.getLogger(this.getClass());
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
@@ -33,6 +42,7 @@ public class UserController {
         List<Student> listStudent = studentService.listAllStudents();
         model.addObject("listStudent", listStudent);
 
+        logger.info(setterMessage.getMessage());
         return model;
     }
 

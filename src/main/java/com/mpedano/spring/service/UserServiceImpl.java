@@ -18,22 +18,22 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> listAllUsers() {
-        return userDao.listAllUsers();
+        return userDao.listAll();
     }
 
     public void addUser(User user) {
-        userDao.addUser(user);
+        userDao.add(user);
     }
 
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        userDao.update(user);
     }
 
     public void deleteUser(int userId) {
-        userDao.deleteUser(userId);
+        userDao.delete(userId);
     }
 
     public User findUserById(int userId) {
-        return userDao.findUserById(userId);
+        return userDao.findById(userId);
     }
 }

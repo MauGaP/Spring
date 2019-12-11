@@ -18,22 +18,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public List<Student> listAllStudents() {
-        return studentDao.listAllStudents();
+        return studentDao.listAll();
     }
 
     public void addStudent(Student student) {
-        studentDao.addStudent(student);
+        studentDao.add(student);
     }
 
     public void updateStudent(Student student) {
-        studentDao.updateStudent(student);
+        studentDao.update(student);
     }
 
     public void deleteStudent(int userId) {
-        studentDao.deleteStudent(userId);
+        studentDao.delete(userId);
     }
 
     public Student findStudentById(int userId) {
-        return studentDao.findStudentById(userId);
+        return studentDao.findById(userId);
     }
 }
