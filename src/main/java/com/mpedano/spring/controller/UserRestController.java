@@ -1,7 +1,6 @@
 package com.mpedano.spring.controller;
 
 import com.mpedano.spring.model.User;
-import com.mpedano.spring.service.StudentService;
 import com.mpedano.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class UserRestController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity getUsers() {
@@ -60,6 +59,15 @@ public class UserRestController {
     @GetMapping(value = "/{firstName}/listByFirstName/")
     public ResponseEntity getUsersByFirstName(@PathVariable("firstName") String firstName) {
         List<User> list = userService.getUsersByFirstName(firstName);
+        return ResponseEntity
+                .ok()
+                .header("myHeader", "myValue")
+                .body(list);
+    }
+
+    @GetMapping(value = "/{lastName}/listByLastName/")
+    public ResponseEntity findByLastName(@PathVariable("lastName") String lastName) {
+        List<User> list = userService.getUsersByLastName(lastName);
         return ResponseEntity
                 .ok()
                 .header("myHeader", "myValue")

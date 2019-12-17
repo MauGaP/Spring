@@ -39,4 +39,8 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersByFirstName(String firstName) {
         return userRepository.findByFirstName(firstName);
     }
+
+    public List<User> getUsersByLastName(String lastName) {
+        return userRepository.buscarPorFirstName(lastName);
+    }
 }
